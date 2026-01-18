@@ -21,6 +21,15 @@ app.use(helmet({
 }));
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
+// Redirect the root URL to the paywall
+app.get('/', (req, res) => {
+  res.redirect('/paywall');
+});
+
+// Serve the actual paywall page (adjust path if needed)
+app.get('/paywall', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'paywall.html'));
+});
 
 const PORT = process.env.PORT || 3000;
 

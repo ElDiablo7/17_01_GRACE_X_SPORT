@@ -2293,36 +2293,6 @@
     </div>
   </div>
 
-  <!-- Minigame Modal -->
-  <div class="modal-overlay" id="minigame-modal">
-    <div class="modal-content" style="max-width: 100%; height: 100%; max-height: 100%; padding: 0; background: #1a1a2e; border: none; display:flex; flex-direction:column;">
-      <button class="modal-close-btn" id="close-minigame" style="position: absolute; top: 20px; right: 20px; color: white; background: rgba(0,0,0,0.5); width: 40px; height: 40px; border-radius: 50%; z-index: 10;">&times;</button>
-      <canvas id="minigame-canvas" style="width: 100%; height: 100%; display: block; touch-action: none;"></canvas>
-    </div>
-  </div>
-
-  <script src="papertoss.js"></script>
-  <script>
-    document.getElementById('open-papertoss').addEventListener('click', () => {
-      const modal = document.getElementById('minigame-modal');
-      modal.classList.add('open');
-      
-      let game = null;
-      const closeBtn = document.getElementById('close-minigame');
-      
-      const onClose = () => {
-        modal.classList.remove('open');
-      };
-      
-      game = new PaperTossGame('minigame-canvas', onClose);
-      
-      // Ensure one listener
-      closeBtn.onclick = () => {
-          if (game) game.close();
-      };
-    });
-  </script>
-
   <script>
     (function() {
       'use strict';

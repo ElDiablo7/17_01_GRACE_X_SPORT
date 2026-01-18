@@ -5396,7 +5396,21 @@ document.getElementById('sport-brain-analyse')?.addEventListener('click', () => 
 
       async function init() {
         console.log('🚀 GRACE-X Sport™ ULTIMATE - Initializing...');
-        
+     // ===== PAYWALL FIRST BOOT (SAFE) =====
+const storedKey = localStorage.getItem("GX_CLIENT_KEY");
+const paywall = document.getElementById("client-key-modal");
+const appRoot = document.getElementById("app-root"); // confirm this exists
+
+if (!storedKey) {
+  // No key → show paywall, lock UI
+  if (paywall) paywall.style.display = "flex";
+  if (appRoot) appRoot.classList.add("locked");
+} else {
+  // Key exists → unlock everything
+  if (paywall) paywall.style.display = "none";
+  if (appRoot) appRoot.classList.remove("locked");
+}
+
         await resolveApiBase();
         
         const savedTheme = localStorage.getItem('GX_THEME') || 'neon';

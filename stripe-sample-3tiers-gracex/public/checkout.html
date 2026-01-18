@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GRACE-X Sport™ – Choose a plan</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <h1>GRACE-X Sport™</h1>
+        <p class="sub">Pick a tier. 7 days free, cancel anytime.</p>
+      </header>
+
+      <section class="grid">
+        <!-- Starter -->
+        <article class="card">
+          <div class="card-head">
+            <h2>Starter</h2>
+            <div class="price">£3.99<span>/mo</span></div>
+            <div class="trial">7 DAYS FREE</div>
+          </div>
+          <ul class="ticks">
+            <li>✅ Basic Live Scores</li>
+            <li>✅ Standard Odds</li>
+            <li>✅ Limited AI Tips</li>
+            <li class="muted">❌ Horse Racing Live</li>
+            <li class="muted">❌ Voice Analysis</li>
+          </ul>
+          <form action="/create-checkout-session" method="POST">
+            <input type="hidden" name="tier" value="starter" />
+            <button class="btn" type="submit">Start Free Trial</button>
+          </form>
+        </article>
+
+        <!-- Pro Punter -->
+        <article class="card highlight">
+          <div class="card-head">
+            <h2>Pro Punter</h2>
+            <div class="price">£12.99<span>/mo</span></div>
+            <div class="trial">7 DAYS FREE</div>
+          </div>
+          <ul class="ticks">
+            <li>✅ All Live Scores</li>
+            <li>✅ AI “Brain” Analytics</li>
+            <li>✅ Live Horse Racing</li>
+            <li>✅ Voice Commentary</li>
+            <li>✅ Advanced Stats</li>
+          </ul>
+          <form action="/create-checkout-session" method="POST">
+            <input type="hidden" name="tier" value="pro" />
+            <button class="btn" type="submit">Start Free Trial</button>
+          </form>
+        </article>
+
+        <!-- Syndicate -->
+        <article class="card">
+          <div class="card-head">
+            <h2>Syndicate</h2>
+            <div class="price">£29.99<span>/mo</span></div>
+            <div class="trial">7 DAYS FREE</div>
+          </div>
+          <ul class="ticks">
+            <li>✅ Everything in Pro</li>
+            <li>✅ API Access</li>
+            <li>✅ Custom Models</li>
+            <li>✅ Priority Support</li>
+            <li>✅ White Label</li>
+          </ul>
+          <form action="/create-checkout-session" method="POST">
+            <input type="hidden" name="tier" value="syndicate" />
+            <button class="btn" type="submit">Start Free Trial</button>
+          </form>
+        </article>
+      </section>
+
+      <section class="keybox">
+        <h3>Already have a key? Activate it here:</h3>
+        <form action="/activate-key" method="POST" class="keyform">
+          <input name="admin_key" placeholder="admin-key" autocomplete="off" />
+          <button class="btn secondary" type="submit">Activate</button>
+        </form>
+        <p class="tiny">(Admin/test use only. Live customers should subscribe via Stripe.)</p>
+      </section>
+    </main>
+  </body>
+</html>

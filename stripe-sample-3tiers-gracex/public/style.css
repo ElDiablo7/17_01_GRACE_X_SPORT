@@ -1,0 +1,182 @@
+/* GRACE-X Sport™ simple pricing page + Stripe sample styles */
+
+:root {
+  --bg: #0b1020;
+  --card: #111a35;
+  --card2: #0f1730;
+  --text: #e8eeff;
+  --muted: rgba(232, 238, 255, 0.75);
+  --border: rgba(232, 238, 255, 0.12);
+  --accent: #556cd6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Ubuntu, sans-serif;
+  background: radial-gradient(1200px 800px at 30% 10%, rgba(85,108,214,0.25), transparent 60%), var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 0.3px;
+}
+
+.sub {
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 920px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent 28%), var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+
+.card.highlight {
+  background: linear-gradient(180deg, rgba(85,108,214,0.22), transparent 38%), var(--card2);
+  border-color: rgba(85,108,214,0.35);
+}
+
+.card-head {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.price {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.price span {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.trial {
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  color: rgba(232, 238, 255, 0.85);
+}
+
+.ticks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: grid;
+  gap: 8px;
+  color: rgba(232, 238, 255, 0.9);
+  flex: 1;
+}
+
+.muted { color: rgba(232, 238, 255, 0.55); }
+
+.btn,
+#checkout-and-portal-button {
+  width: 100%;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.18s ease;
+}
+
+.btn:hover,
+#checkout-and-portal-button:hover { opacity: 0.86; }
+
+.btn.secondary {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid var(--border);
+}
+
+.keybox {
+  margin-top: 18px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+}
+
+.keybox h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: rgba(232, 238, 255, 0.95);
+}
+
+.keyform {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 10px;
+}
+
+@media (max-width: 520px) {
+  .keyform { grid-template-columns: 1fr; }
+}
+
+input {
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.25);
+  color: var(--text);
+  padding: 0 12px;
+  outline: none;
+}
+
+input::placeholder { color: rgba(232, 238, 255, 0.55); }
+
+.tiny { color: rgba(232, 238, 255, 0.65); font-size: 12px; margin: 10px 0 0; }
+
+/* Keep Stripe sample success/cancel layout usable */
+section {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  max-width: 520px;
+  margin: 24px auto;
+}
+
+p { margin: 0; color: rgba(232, 238, 255, 0.85); }
+
+svg { display: none; }

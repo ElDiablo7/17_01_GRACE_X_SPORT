@@ -4,7 +4,6 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import Stripe from "stripe";
 
 dotenv.config();
 
@@ -12,8 +11,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder");
-
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(helmet({
@@ -21,16 +18,6 @@ app.use(helmet({
 }));
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
-// Redirect the root URL to the paywall
-app.get('/', (req, res) => {
-  res.redirect('/paywall');
-});
-
-// Serve the actual paywall page (adjust path if needed)
-app.get('/paywall', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'paywall.html'));
-});
-
 const PORT = process.env.PORT || 3000;
 
 // ======== Tiered Access Control ========
@@ -97,47 +84,6 @@ app.get("/api/health", (_req, res) => {
     racingConfigured: Boolean(process.env.RACING_BASE_URL),
     openaiConfigured: Boolean(process.env.OPENAI_API_KEY),
   });
-});
-
-// ======== Stripe Payments ========
-app.get("/api/config", (req, res) => {
-  res.json({
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || "pk_test_placeholder",
-    priceProId: process.env.STRIPE_PRICE_PRO || "",
-    priceVipId: process.env.STRIPE_PRICE_VIP || ""
-  });
-});
-
-app.post("/api/create-checkout-session", async (req, res) => {
-  const { priceId, hasTrial } = req.body;
-  const domain = `${req.protocol}://${req.get("host")}`;
-
-  try {
-    const sessionConfig = {
-      payment_method_types: ["card"],
-      line_items: [
-        {
-          price: priceId, // e.g. 'price_12345'
-          quantity: 1,
-        },
-      ],
-      mode: "subscription",
-      success_url: `${domain}/?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${domain}/?canceled=true`,
-    };
-
-    if (hasTrial) {
-      sessionConfig.subscription_data = {
-        trial_period_days: 7
-      };
-    }
-
-    const session = await stripe.checkout.sessions.create(sessionConfig);
-    res.json({ id: session.id });
-  } catch (error) {
-    console.error("Stripe error:", error);
-    res.status(500).json({ error: error.message });
-  }
 });
 
 // ======== Football (choose provider) ========
